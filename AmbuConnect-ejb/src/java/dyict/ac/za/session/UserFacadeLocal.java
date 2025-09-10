@@ -21,4 +21,7 @@ public interface UserFacadeLocal {
 
     int count();
     
+    //support login by email
+    User findByEmail(String email);
+    
 }

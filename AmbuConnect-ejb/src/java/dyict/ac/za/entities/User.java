@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +27,13 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String role; //"ADMIN","PATIENT","DRIVER","PARAMEDIC"
     
+    @Column(updatable  = false)
     private Timestamp createdAt;
+    
+    @PrePersist
+    protected void onCreate(){
+       this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     public String getName() {
         return name;
